@@ -31,6 +31,7 @@ if theme == "Dark":
     h1 {color: white;}
     div.stButton > button {background-color: #424242; color: white;}
     div[data-baseweb="select"] > div {background-color: #424242; color: white;}
+    .stDownloadButton > button {background-color: #424242; color: white;}
     </style>
     """
 else:
@@ -42,6 +43,7 @@ else:
     h1 {color: #0d47a1;}
     div.stButton > button {background-color: #2196F3; color: white;}
     div[data-baseweb="select"] > div {background-color: #ffffff; color: black;}
+    .stDownloadButton > button {background-color: #2196F3; color: white;}
     </style>
     """
 st.markdown(custom_css, unsafe_allow_html=True)
