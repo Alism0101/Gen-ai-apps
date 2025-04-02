@@ -50,6 +50,9 @@ else:
     div[data-testid="stSelectbox"] label, 
     div[data-testid="stTextArea"] label {
     color: black !important; 
+    div[data-testid="stNotification"][class*="st-warning"] { 
+    color: #E65100 !important; 
+}
 } 
     </style>
     """
