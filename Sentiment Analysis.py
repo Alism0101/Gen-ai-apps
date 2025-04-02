@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.express as px
 
 st.set_page_config(page_title="Enhanced Sentiment Analysis", layout="wide")
-st.title("📝 Enhanced Sentiment Analysis with Visualization")
+st.title(" Enhanced Sentiment Analysis with Visualization")
 
 @st.cache_resource
 def load_model():
@@ -67,22 +67,22 @@ if st.button("Analyze Sentiment"):
                 data.append({"Sentence": sentence, "Short": short_label, "Sentiment": sentiment, "Confidence": f"{score:.2%}", "Score": score})
             df = pd.DataFrame(data)
 
-            st.markdown("### 📊 Sentiment Results:")
+            st.markdown("###  Sentiment Results:")
             st.dataframe(df[["Sentence", "Sentiment", "Confidence"]].style.applymap(
                 lambda x: "color: green;" if "Positive" in x else ("color: red;" if "Negative" in x else "color: gray;"),
                 subset=["Sentiment"]
             ))
-            st.markdown("#### 📌 Note: 'Short' represents a simplified label (S1, S2, etc.) for each sentence, used for clear and compact visualization.")
+            st.markdown("####  Note: 'Short' represents a simplified label (S1, S2, etc.) for each sentence, used for clear and compact visualization.")
 
-            st.markdown("### 📊 Sentiment Distribution:")
+            st.markdown("###  Sentiment Distribution:")
             fig_pie = px.pie(df, names="Sentiment", title="Sentiment Distribution")
             st.plotly_chart(fig_pie, use_container_width=True)
 
-            st.markdown("### 📊 Sentiment Scores Comparison:")
+            st.markdown("###  Sentiment Scores Comparison:")
             fig_bar = px.bar(df, x="Short", y="Score", title="Sentiment Scores Comparison", labels={"Score": "Confidence Score"})
             st.plotly_chart(fig_bar, use_container_width=True)
 
             csv = df.to_csv(index=False).encode('utf-8')
             st.download_button("Download CSV", csv, "sentiment_analysis_results.csv", "text/csv")
     else:
-        st.warning("⚠️ Please enter some text.")
+        st.warning("⚠ Please enter some text.")
