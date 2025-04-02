@@ -3,7 +3,7 @@ from transformers import pipeline
 
 def main():
     # Set the title and description
-    st.title("📝 Sentiment Analysis")
+    st.title(" Sentiment Analysis")
     st.markdown("""
     Analyze the sentiment of your text using a powerful AI model. 
     This app uses the **DistilBERT** model fine-tuned on sentiment analysis to predict whether your text is positive or negative.
@@ -16,10 +16,10 @@ def main():
                 result = model(input_text)
                 label = result[0]['label']
                 score = result[0]['score']
-                st.markdown(f"### 📊 Prediction: **{label}**")
+                st.markdown(f"###  Prediction: **{label}**")
                 st.markdown(f"#### Confidence Score: **{score:.2%}**")
         else:
-            st.warning("⚠️ Please enter some text to analyze.")
+            st.warning("⚠ Please enter some text to analyze.")
 
 if __name__ == "__main__":
     main()
