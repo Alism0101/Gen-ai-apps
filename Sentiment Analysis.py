@@ -24,21 +24,25 @@ theme = st.selectbox("Select Theme", ["Light", "Dark"])
 
 if theme == "Dark":
     custom_css = """
+    <style>
     [data-testid="stAppViewContainer"] {background-color: #1e1e1e; color: white;}
     [data-testid="stHeader"] {background-color: #1e1e1e; color: white;}
     .stTextArea textarea {background-color: #424242; color: white; border: 1px solid #90caf9;}
     h1 {color: white;}
     div.stButton > button {background-color: #424242; color: white;}
     div[data-baseweb="select"] > div {background-color: #424242; color: white;}
+    </style>
     """
 else:
     custom_css = """
+    <style>
     [data-testid="stAppViewContainer"] {background-color: #e0f7fa; color: black;}
     [data-testid="stHeader"] {background-color: #e0f7fa; color: black;}
     .stTextArea textarea {background-color: #ffffff; color: black; border: 1px solid #90caf9;}
     h1 {color: #0d47a1;}
     div.stButton > button {background-color: #2196F3; color: white;}
     div[data-baseweb="select"] > div {background-color: #ffffff; color: black;}
+    </style>
     """
 st.markdown(custom_css, unsafe_allow_html=True)
 
