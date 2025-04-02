@@ -85,6 +85,7 @@ else:
 st.markdown(custom_css, unsafe_allow_html=True)
 
 input_text = st.text_area("Enter text (one sentence per line):", height=200)
+
 if st.button("Analyze Sentiment"):
     if input_text.strip():
         with st.spinner("Analyzing..."):
@@ -98,22 +99,27 @@ if st.button("Analyze Sentiment"):
                 sentiment_counts[sentiment] += 1
                 data.append({"Sentence": sentence, "Sentiment": sentiment, "Confidence": f"{score:.2%}", "Score": score})
             df = pd.DataFrame(data)
+            
             st.markdown("### 📊 Sentiment Results:")
             st.dataframe(df.style.applymap(lambda x: "color: green;" if "Positive" in x else ("color: red;" if "Negative" in x else "color: gray;"), subset=["Sentiment"]))
+            
             st.markdown("### 📊 Sentiment Distribution:")
-            fig1, ax1 = plt.subplots()
+            fig_pie, ax_pie = plt.subplots(figsize=(4, 4))  # Smaller pie chart
             labels = list(sentiment_counts.keys())
             sizes = list(sentiment_counts.values())
-            ax1.pie(sizes, labels=labels, autopct="%1.1f%%", colors=["#FF6B6B", "#FFA07A", "#FFD700", "#98FB98", "#32CD32"])
-            ax1.set_title("Sentiment Distribution")
-            st.pyplot(fig1)
+            ax_pie.pie(sizes, labels=labels, autopct="%1.1f%%", colors=["#FF6B6B", "#FFA07A", "#FFD700", "#98FB98", "#32CD32"])
+            ax_pie.set_title("Sentiment Distribution")
+            st.pyplot(fig_pie)
+            
             st.markdown("### 📊 Sentiment Scores Comparison:")
-            fig2, ax2 = plt.subplots()
-            df['Score'] = df['Score'].astype(float)
-            df.plot(kind="barh", x="Sentence", y="Score", color="#4682B4", ax=ax2, legend=False)
-            ax2.set_xlabel("Confidence Score")
-            ax2.set_title("Sentiment Scores for Each Sentence")
-            st.pyplot(fig2)
+            # Create a variable for sentiment score comparison
+            score_comparison = df[['Sentence', 'Score']]
+            fig_bar, ax_bar = plt.subplots(figsize=(8, 4))
+            score_comparison.plot(kind="barh", x="Sentence", y="Score", color="#4682B4", ax=ax_bar, legend=False)
+            ax_bar.set_xlabel("Confidence Score")
+            ax_bar.set_title("Sentiment Scores for Each Sentence")
+            st.pyplot(fig_bar)
+            
             csv = df.to_csv(index=False).encode('utf-8')
             st.download_button("Download CSV", csv, "sentiment_analysis_results.csv", "text/csv")
     else:
