@@ -4,3 +4,6 @@ tensorflow
 keras
 tf-keras
 matplotlib
+plotly
+pandas
+streamlit
