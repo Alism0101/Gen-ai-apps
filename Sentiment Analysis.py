@@ -24,25 +24,21 @@ theme = st.selectbox("Select Theme", ["Light", "Dark"])
 
 if theme == "Dark":
     custom_css = """
-    <style>
     [data-testid="stAppViewContainer"] {background-color: #1e1e1e; color: white;}
     [data-testid="stHeader"] {background-color: #1e1e1e; color: white;}
     .stTextArea textarea {background-color: #424242; color: white; border: 1px solid #90caf9;}
     h1 {color: white;}
     div.stButton > button {background-color: #424242; color: white;}
     div[data-baseweb="select"] > div {background-color: #424242; color: white;}
-    </style>
     """
 else:
     custom_css = """
-    <style>
     [data-testid="stAppViewContainer"] {background-color: #e0f7fa; color: black;}
     [data-testid="stHeader"] {background-color: #e0f7fa; color: black;}
     .stTextArea textarea {background-color: #ffffff; color: black; border: 1px solid #90caf9;}
     h1 {color: #0d47a1;}
     div.stButton > button {background-color: #2196F3; color: white;}
     div[data-baseweb="select"] > div {background-color: #ffffff; color: black;}
-    </style>
     """
 st.markdown(custom_css, unsafe_allow_html=True)
 
@@ -55,7 +51,7 @@ if st.button("Analyze Sentiment"):
             results = model(sentences)
             data = []
             sentiment_counts = {"Negative": 0, "Neutral": 0, "Positive": 0}
-            short_names = []  # For short labels on the y-axis
+            short_names = []
             for i, sentence in enumerate(sentences):
                 sentiment = map_label(results[i]['label'])
                 score = results[i]['score']
@@ -64,30 +60,31 @@ if st.button("Analyze Sentiment"):
                 short_names.append(short_label)
                 data.append({"Sentence": sentence, "Short": short_label, "Sentiment": sentiment, "Confidence": f"{score:.2%}", "Score": score})
             df = pd.DataFrame(data)
-            
+
             st.markdown("### 📊 Sentiment Results:")
             st.dataframe(df[["Sentence", "Sentiment", "Confidence"]].style.applymap(
                 lambda x: "color: green;" if "Positive" in x else ("color: red;" if "Negative" in x else "color: gray;"),
                 subset=["Sentiment"]
             ))
-            
+            st.markdown("#### 📌 Note: 'Short' represents a simplified label (S1, S2, etc.) for each sentence, used for clear and compact visualization.")
+
             st.markdown("### 📊 Sentiment Distribution:")
-            fig_pie, ax_pie = plt.subplots(figsize=(3, 3))  # Smaller pie chart
+            fig_pie, ax_pie = plt.subplots(figsize=(3, 3))
             labels = list(sentiment_counts.keys())
             sizes = list(sentiment_counts.values())
-            ax_pie.pie(sizes, labels=labels, autopct="%1.1f%%", colors=["#FF6B6B", "#FFD700", "#98FB98"])
+            ax_pie.pie(sizes, labels=labels, autopct="%1.1f%%", colors=["#FF6B6B", "#FFD700", "#98FB98"], textprops={'fontsize': 8})
             ax_pie.set_title("Sentiment Distribution", fontsize=10)
             plt.tight_layout()
             st.pyplot(fig_pie)
-            
+
             st.markdown("### 📊 Sentiment Scores Comparison:")
             score_comparison = df[["Short", "Score"]]
-            fig_bar, ax_bar = plt.subplots(figsize=(6, 3))  # Reduced figure size for bar chart
+            fig_bar, ax_bar = plt.subplots(figsize=(6, 3))
             score_comparison.plot(kind="barh", x="Short", y="Score", color="#4682B4", ax=ax_bar, legend=False)
             ax_bar.set_xlabel("Confidence Score")
             ax_bar.set_title("Scores per Sentence", fontsize=10)
             st.pyplot(fig_bar)
-            
+
             csv = df.to_csv(index=False).encode('utf-8')
             st.download_button("Download CSV", csv, "sentiment_analysis_results.csv", "text/csv")
     else:
