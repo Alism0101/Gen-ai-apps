@@ -46,8 +46,11 @@ else:
     div.stButton > button {background-color: #2196F3; color: white;}
     div[data-baseweb="select"] > div {background-color: #ffffff; color: black;}
     .stDownloadButton > button {background-color: #2196F3; color: white;}
-    .st-warning {color: black;}
-    label {color: black;}
+    .st-warning {color: #E65100;}
+    div[data-testid="stSelectbox"] label, 
+    div[data-testid="stTextArea"] label {
+    color: black !important; 
+} 
     </style>
     """
 st.markdown(custom_css, unsafe_allow_html=True)
