@@ -1,6 +1,6 @@
-# Gen-AI Programs
+# Gen-AI Apps
 
-Welcome to the Gen-AI Programs repository! This collection showcases various applications harnessing the power of Generative Artificial Intelligence. Whether you're a developer, researcher, or AI enthusiast, you'll find these programs insightful and inspiring.
+Welcome to the Gen-AI Apps repository! This collection showcases various applications harnessing the power of Generative Artificial Intelligence. Whether you're a developer, researcher, or AI enthusiast, you'll find these programs insightful and inspiring.
 
 ## Table of Contents
 
