@@ -46,13 +46,10 @@ else:
     div.stButton > button {background-color: #2196F3; color: white;}
     div[data-baseweb="select"] > div {background-color: #ffffff; color: black;}
     .stDownloadButton > button {background-color: #2196F3; color: white;}
-    .st-warning {color: #E65100;}
+    .st-warning {color: #000000;}
     div[data-testid="stSelectbox"] label, 
     div[data-testid="stTextArea"] label {
     color: black !important; 
-     div[data-testid="stNotification"][class*="st-warning"] div {
-     color: #E65100 !important; /* Target a div inside the specific notification */
- }
 } 
     </style>
     """
