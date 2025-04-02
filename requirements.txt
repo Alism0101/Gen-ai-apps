@@ -3,3 +3,4 @@ torch
 tensorflow
 keras
 tf-keras
+matplotlib
