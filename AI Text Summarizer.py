@@ -23,7 +23,7 @@ min_length = st.slider("Min Summary Length", min_value=20, max_value=50, value=3
 if st.button("Summarize"):
     if long_text.strip():
         with st.spinner("Generating summary... ⏳"):
-            summary = summarizer(long_text, max_length=max_length, min_length=min_length, do_sample=False)
+            summary = summarizer(long_text, max_length=max_length, min_length=min_length, do_sample=True)
             st.subheader("Summary:")
             st.success(summary[0]['summary_text'])
     else:
