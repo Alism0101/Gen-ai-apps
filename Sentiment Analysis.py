@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Advanced Sentiment Analysis", layout="wide")
-st.title(" Enhanced Sentiment Analysis with Visualization")
+st.title("📝 Enhanced Sentiment Analysis with Visualization")
 
 @st.cache_resource
 def load_model():
@@ -34,8 +34,10 @@ if theme == "Dark":
 else:
     custom_css = """
     <style>
-    [data-testid="stAppViewContainer"] {background-color: #f0f0f0; color: black;}
-    [data-testid="stHeader"] {background-color: #f0f0f0; color: black;}
+    [data-testid="stAppViewContainer"] {background-color: #e0f7fa; color: black;}
+    [data-testid="stHeader"] {background-color: #e0f7fa; color: black;}
+    .stTextArea textarea {background-color: #ffffff; color: black; border: 1px solid #90caf9;}
+    h1 {color: #0d47a1;}
     </style>
     """
 st.markdown(custom_css, unsafe_allow_html=True)
@@ -63,7 +65,7 @@ if st.button("Analyze Sentiment"):
             ax1.pie(sizes, labels=labels, autopct="%1.1f%%", colors=["#FF6B6B", "#FFA07A", "#FFD700", "#98FB98", "#32CD32"])
             ax1.set_title("Sentiment Distribution")
             st.pyplot(fig1)
-            st.markdown("###  Sentiment Scores Comparison:")
+            st.markdown("### 📊 Sentiment Scores Comparison:")
             fig2, ax2 = plt.subplots()
             df['Score'] = df['Score'].astype(float)
             df.plot(kind="barh", x="Sentence", y="Score", color="#4682B4", ax=ax2, legend=False)
@@ -73,4 +75,4 @@ if st.button("Analyze Sentiment"):
             csv = df.to_csv(index=False).encode('utf-8')
             st.download_button("Download CSV", csv, "sentiment_analysis_results.csv", "text/csv")
     else:
-        st.warning("⚠ Please enter some text.")
+        st.warning("⚠️ Please enter some text.")
