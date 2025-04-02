@@ -45,7 +45,7 @@ else:
     div.stButton > button {background-color: #2196F3; color: white;}
     div[data-baseweb="select"] > div {background-color: #ffffff; color: black;}
     .stDownloadButton > button {background-color: #2196F3; color: white;}
-    .st-warning {color: orange;}
+    .st-warning {color: black;}
     </style>
     """
 st.markdown(custom_css, unsafe_allow_html=True)
