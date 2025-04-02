@@ -2,8 +2,9 @@ import streamlit as st
 from transformers import pipeline
 import pandas as pd
 import matplotlib.pyplot as plt
+import plotly.express as px  # For interactive plots
 
-st.set_page_config(page_title="Advanced Sentiment Analysis", layout="wide")
+st.set_page_config(page_title="Enhanced Sentiment Analysis", layout="wide")
 st.title("📝 Enhanced Sentiment Analysis with Visualization")
 
 @st.cache_resource
@@ -69,21 +70,12 @@ if st.button("Analyze Sentiment"):
             st.markdown("#### 📌 Note: 'Short' represents a simplified label (S1, S2, etc.) for each sentence, used for clear and compact visualization.")
 
             st.markdown("### 📊 Sentiment Distribution:")
-            fig_pie, ax_pie = plt.subplots(figsize=(3, 3))
-            labels = list(sentiment_counts.keys())
-            sizes = list(sentiment_counts.values())
-            ax_pie.pie(sizes, labels=labels, autopct="%1.1f%%", colors=["#FF6B6B", "#FFD700", "#98FB98"], textprops={'fontsize': 8})
-            ax_pie.set_title("Sentiment Distribution", fontsize=10)
-            plt.tight_layout()
-            st.pyplot(fig_pie)
+            fig_pie = px.pie(df, names="Sentiment", title="Sentiment Distribution")
+            st.plotly_chart(fig_pie, use_container_width=True)
 
             st.markdown("### 📊 Sentiment Scores Comparison:")
-            score_comparison = df[["Short", "Score"]]
-            fig_bar, ax_bar = plt.subplots(figsize=(6, 3))
-            score_comparison.plot(kind="barh", x="Short", y="Score", color="#4682B4", ax=ax_bar, legend=False)
-            ax_bar.set_xlabel("Confidence Score")
-            ax_bar.set_title("Scores per Sentence", fontsize=10)
-            st.pyplot(fig_bar)
+            fig_bar = px.bar(df, x="Short", y="Score", title="Sentiment Scores Comparison", labels={"Score": "Confidence Score"})
+            st.plotly_chart(fig_bar, use_container_width=True)
 
             csv = df.to_csv(index=False).encode('utf-8')
             st.download_button("Download CSV", csv, "sentiment_analysis_results.csv", "text/csv")
