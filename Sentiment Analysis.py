@@ -46,7 +46,7 @@ else:
     div.stButton > button {background-color: #2196F3; color: white;}
     div[data-baseweb="select"] > div {background-color: #ffffff; color: black;}
     .stDownloadButton > button {background-color: #2196F3; color: white;}
-    .st-warning {color: #000000;}
+    .st-warning {color: #fff;}
     div[data-testid="stSelectbox"] label, 
     div[data-testid="stTextArea"] label {
     color: black !important; 
