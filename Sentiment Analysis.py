@@ -1,8 +1,7 @@
 import streamlit as st
 from transformers import pipeline
 import pandas as pd
-import matplotlib.pyplot as plt
-import plotly.express as px  # For interactive plots
+import plotly.express as px
 
 st.set_page_config(page_title="Enhanced Sentiment Analysis", layout="wide")
 st.title("📝 Enhanced Sentiment Analysis with Visualization")
