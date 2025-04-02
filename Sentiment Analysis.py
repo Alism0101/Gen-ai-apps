@@ -1,5 +1,3 @@
-pip install matplotlib
-
 import streamlit as st
 from transformers import pipeline
 import pandas as pd
